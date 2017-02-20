@@ -8,11 +8,6 @@ gem_package "bcrypt" do
   action :install
 end
 
-# Ftp services need pusher-client system wide.
-gem_package "pusher-client" do
-  action :install
-end
-
 remote_file "/tmp/pure-ftpd-#{node['cookbook_clarus']['pure-ftpd']['version']}.tar.gz" do
   source node['cookbook_clarus']['pure-ftpd']['url']
 end
@@ -28,14 +23,6 @@ bash 'Download Pure-FTPD' do
 end
 
 directory '/etc/pure-ftpd' do
-  owner 'root'
-  group 'root'
-  mode '0755'
-  action :create
-  recursive true
-end
-
-directory '/home/apps/'+node['cookbook_clarus']['appname']+'/current/public/uploads' do
   owner 'root'
   group 'root'
   mode '0755'
